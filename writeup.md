@@ -18,7 +18,10 @@ The goals / steps of this project are the following:
 [center_resize]: ./examples/center_resize.jpg "center_resize"
 [left_resize]: ./examples/left_resize.jpg "left_resize"
 [right_resize]: ./examples/right_resize.jpg "right_resize"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[center_rgb]: ./examples/center_rgb.jpg "center_resize"
+[left_rgb]: ./examples/left_rgb.jpg "left_resize"
+[right_rgb]: ./examples/right_rgb.jpg "right_resize"
+
 
 ---
 ### Files Submitted & Code Quality
@@ -70,17 +73,19 @@ nvidia.add(Dense(1))
 
 
 ### Data preprocessing
+
 ##### 1. Original data
 ![alt text][left] ![alt text][center] ![alt text][right]
 
 ![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
+
 ##### 2. Genometric transformation
 ![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
+
 ##### 3. Change colorspaces
+![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
 
-##### 4. Using multiple cameras
-
-##### 5. Data shuffling
+##### 4. Data shuffling
 I finally randomly shuffled the data set and put Y% of the data into a validation set.
 ```sh
 X_train, y_train = shuffle(X_train, y_train)
