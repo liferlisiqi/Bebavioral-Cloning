@@ -12,10 +12,16 @@ The goals / steps of this project are the following:
 [center]: ./examples/center.jpg "center"
 [left]: ./examples/left.jpg "left"
 [right]: ./examples/right.jpg "right"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[center_bgr]: ./examples/center_bgr.jpg "center"
+[left_bgr]: ./examples/left_bgr.jpg "left"
+[right_bgr]: ./examples/right_bgr.jpg "right"
+[center_resize]: ./examples/center_resize.jpg "center_resize"
+[left_resize]: ./examples/left_resize.jpg "left_resize"
+[right_resize]: ./examples/right_resize.jpg "right_resize"
+[center_rgb]: ./examples/center_rgb.jpg "center_resize"
+[left_rgb]: ./examples/left_rgb.jpg "left_resize"
+[right_rgb]: ./examples/right_rgb.jpg "right_resize"
+
 
 ---
 ### Files Submitted & Code Quality
@@ -67,16 +73,23 @@ nvidia.add(Dense(1))
 
 
 ### Data preprocessing
+
 ##### 1. Original data
-![alt text][center] ![alt text][left] ![alt text][right]
+The original imagine is in RGB and in (160, 320).  
+![alt text][left] ![alt text][center] ![alt text][right]  
+But cv2.imread() read imagines as BGR and this will have a great impact.  
+![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
+
 ##### 2. Genometric transformation
-![alt text][center_resize] ![alt text][left] ![alt text][right]
+For training efficiency and accurancy, I change the shape of imagine from (160, 320) to (80, 80)  
+![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
+
 ##### 3. Change colorspaces
+Then, I change the colorspace of the resized imagine.  
+![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
 
-##### 4. Using multiple cameras
-
-##### 5. Data shuffling
-I finally randomly shuffled the data set and put Y% of the data into a validation set.
+##### 4. Data shuffling
+Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
 ```sh
 X_train, y_train = shuffle(X_train, y_train)
 ```
@@ -103,3 +116,4 @@ nvidia.save('model.h5')
 
 ### Testing result
 The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.
+
