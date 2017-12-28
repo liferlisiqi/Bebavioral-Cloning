@@ -76,7 +76,7 @@ nvidia.add(Dense(1))
 
 ##### 1. Original data
 The original imagine is in RGB and in (160, 320).  
-![alt text][left] ![alt text][center] ![alt text][right]
+![alt text][left] ![alt text][center] ![alt text][right]  
 But cv2.imread() read imagines as BGR and this will have a great impact.  
 ![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
 
