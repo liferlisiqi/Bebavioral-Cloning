@@ -68,11 +68,9 @@ nvidia.add(Dense(1))
 
 ### Data preprocessing
 ##### 1. Original data
-![alt text][center]
-![alt text][left]
-![alt text][right]
+![alt text][center] ![alt text][left] ![alt text][right]
 ##### 2. Genometric transformation
-
+![alt text][center_resize] ![alt text][left] ![alt text][right]
 ##### 3. Change colorspaces
 
 ##### 4. Using multiple cameras
