@@ -13,8 +13,8 @@ The goals / steps of this project are the following:
 [left]: ./examples/left.jpg "left"
 [right]: ./examples/right.jpg "right"
 [center_resize]: ./examples/center_resize.jpg "center_resize"
-[left_resize]: ./examples/center_resize.jpg "left_resize"
-[right_resize]: ./examples/center_resize.jpg "right_resize"
+[left_resize]: ./examples/left_resize.jpg "left_resize"
+[right_resize]: ./examples/right_resize.jpg "right_resize"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
 ---
@@ -68,9 +68,9 @@ nvidia.add(Dense(1))
 
 ### Data preprocessing
 ##### 1. Original data
-![alt text][center] ![alt text][left] ![alt text][right]
+![alt text][left] ![alt text][center] ![alt text][right]
 ##### 2. Genometric transformation
-![alt text][center_resize] ![alt text][left_resize] ![alt text][right_resize]
+![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
 ##### 3. Change colorspaces
 
 ##### 4. Using multiple cameras
