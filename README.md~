@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 ### Dependencies
 This lab requires:
 
-* Docker image [uda:v10](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
+* Docker imageine [uda:v10](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
 * Docker imageine [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit) for testing. 
 * [Simulator](https://github.com/udacity/self-driving-car-sim) for testing and collecting data.
 
