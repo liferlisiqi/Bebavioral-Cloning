@@ -12,6 +12,9 @@ The goals / steps of this project are the following:
 [center]: ./examples/center.jpg "center"
 [left]: ./examples/left.jpg "left"
 [right]: ./examples/right.jpg "right"
+[center_bgr]: ./examples/center_bgr.jpg "center"
+[left_bgr]: ./examples/left_bgr.jpg "left"
+[right_bgr]: ./examples/right_bgr.jpg "right"
 [center_resize]: ./examples/center_resize.jpg "center_resize"
 [left_resize]: ./examples/left_resize.jpg "left_resize"
 [right_resize]: ./examples/right_resize.jpg "right_resize"
@@ -69,6 +72,8 @@ nvidia.add(Dense(1))
 ### Data preprocessing
 ##### 1. Original data
 ![alt text][left] ![alt text][center] ![alt text][right]
+
+![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
 ##### 2. Genometric transformation
 ![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
 ##### 3. Change colorspaces
