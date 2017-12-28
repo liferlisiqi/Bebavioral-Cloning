@@ -75,18 +75,21 @@ nvidia.add(Dense(1))
 ### Data preprocessing
 
 ##### 1. Original data
+The original imagine is in RGB and in (160, 320):
 ![alt text][left] ![alt text][center] ![alt text][right]
-
+But cv2.imread() read imagines as BGR and this will have a great impact.
 ![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
 
 ##### 2. Genometric transformation
+For training efficiency and accurancy, I change the shape of imagine from (160, 320) to (80, 80)
 ![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
 
 ##### 3. Change colorspaces
+Then, I change the colorspace of the resized imagine.
 ![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
 
 ##### 4. Data shuffling
-I finally randomly shuffled the data set and put Y% of the data into a validation set.
+Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
 ```sh
 X_train, y_train = shuffle(X_train, y_train)
 ```
