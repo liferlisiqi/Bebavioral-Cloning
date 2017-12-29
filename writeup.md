@@ -48,7 +48,7 @@ nvidia.add(Lambda(lambda x: x/255. - 0.5, input_shape=(80, 80, 3)))
 nvidia.add(Cropping2D(cropping=((35, 13), (0, 0))))
 ```
 
-Based on the model of Nvidia, my model consists of a convolution neural network with 3x3 filter sizes and depths between 24 and 64. And the The model includes RELU layers to introduce nonlinearity.
+Based on the model of Nvidia, my model consists of a convolution neural network with 3x3 filter sizes and depths between 24 and 64. And the The model includes RELU layers to introduce nonlinearity. The Original filter of the first two layers are 5x5, which is not suitable for my model, so I change to 3x3.
 ```sh
 nvidia.add(Convolution2D(24, 3, 3, subsample=(2, 2), activation='relu'))
 nvidia.add(Convolution2D(36, 3, 3, subsample=(2, 2), activation='relu'))
@@ -57,7 +57,7 @@ nvidia.add(Convolution2D(64, 3, 3, activation='relu'))
 nvidia.add(Convolution2D(64, 3, 3, activation='relu'))
 ```
 
-The model contains dropout layer between convolution layers and fully connected layers in order to reduce overfitting. 
+To combat the overfitting, I add dropout layer(0.5) between convolution layers and fully connected layers. 
 ```sh
 nvidia.add(Dropout(0.5))
 ```
@@ -71,9 +71,26 @@ nvidia.add(Dense(10))
 nvidia.add(Dense(1))
 ```
 
+The final model architecture is as following:
+| Layer         		|     Description	        					| Input     | Output     |  Activation
+|:---------------------:|:---------------------------------------------:|:---------:|:----------:|:-----------:
+| Lambda             	| Normalize imagine from 0~255 to -0.5~0.5      | 80x80x3   | 80x80x3    |
+| Cropping            	| Crop imagine from (80, 80) to (80, 32)        | 80x80x3   | 80x32x3    |
+| Convolution       	| kernel: 3x3; stride:2x2; padding: valid  	    | 80x32x3   | 39x15x24   | Relu
+| Convolution       	| kernel: 3x3; stride:2x2; padding: valid 	    | 39x15x24  | 19x7x36    | Rule
+| Convolution       	| kernel: 3x3; stride:1x1; padding: valid 	    | 19x7x36   | 17x5x48    | Relu
+| Convolution       	| kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48   | 15x3x64    | Relu   
+| Convolution       	| kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64   | 13x1x64    | Relu 
+| Dropout				| Avoiding overfitting      					| 13x1x64   | 13x1x64    |
+| Flatten				| Input 13x1x64 -> Output 832					| 13x1x64   | 832        |
+| Fully connected		| connect every neurel with next layer 		    | 832       | 100        |
+| Fully connected		| connect every neurel with next layer	        | 100       | 50         |
+| Fully connected		| connect every neurel with next layer  		| 50        | 10         |
+| Fully connected		| output a prediction of steering angle  		|
+
 
 ### Data preprocessing
-
+I use the sample data provided by Udacity to train my model, the sample data contains imagines capture by three camera(left/center/right) and a .csv file recording the steering angles. All the imagine captured by three camera are used to train my model and steering angles for left and right  are moddified to correct the behavioral of vihicle.
 ##### 1. Original data
 The original imagine is in RGB and in (160, 320).  
 ![alt text][left] ![alt text][center] ![alt text][right]  
@@ -88,7 +105,14 @@ For training efficiency and accurancy, I change the shape of imagine from (160, 
 Then, I change the colorspace of the resized imagine.  
 ![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
 
-##### 4. Data shuffling
+##### 4. Angle modification
+The steering angles(labels) for left/right camera are modified by adding +/-0.15 to make the vihicle performs better.
+```sh
+left_angle = float(line[3]) + 0.15
+right_angle = float(line[3]) - 0.15
+```
+
+##### 5. Data shuffling
 Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
 ```sh
 X_train, y_train = shuffle(X_train, y_train)
@@ -116,4 +140,5 @@ nvidia.save('model.h5')
 
 ### Testing result
 The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.
+Moreover, I've tried to use generator to read data, but the vehicle performs much worse, thus, I give up using generator.
 
