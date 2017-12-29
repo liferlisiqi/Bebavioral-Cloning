@@ -21,11 +21,23 @@ The goals / steps of this project are the following:
 ### Dependencies
 This lab requires:
 
-* Docker image [uda:v10](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
+* Docker image [lsq-v1](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
 * Docker imageine [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit) for testing. 
 * [Simulator](https://github.com/udacity/self-driving-car-sim) for testing and collecting data.
 
 ## Details About Files In This Directory
+
+### `lsq-v1`
+This is a dockerfile to make docker image:
+```sh
+docker build -t=lsq:v1 -f=lsq-v1 .
+```
+
+And run the above docker image:
+```sh
+nvidia-docker run -it --rm -p 8888:8888 -v `pwd`:/notebooks lsq:v1
+```
+
 
 ### `drive.py`
 

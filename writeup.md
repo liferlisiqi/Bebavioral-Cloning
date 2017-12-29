@@ -139,6 +139,6 @@ nvidia.save('model.h5')
 
 
 ### Testing result
-The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.
+The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.  
 Moreover, I've tried to use generator to read data, but the vehicle performs much worse, thus, I give up using generator.
 
