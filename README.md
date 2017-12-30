@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 * Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
 * Summarize the results.
 
-Dependencies and environment
+Environment and files
 ---
 This lab requires:
 
@@ -27,9 +27,15 @@ This lab requires:
 * [Simulator](https://github.com/udacity/self-driving-car-sim) for testing and collecting data.
 * [Sample data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided by Udacity on track 1.
 
-### Details About Files In This Directory
+The project includes the following files:
+* model.py containing the script to create and train the model
+* drive.py for driving the car in autonomous mode
+* model.h5 containing a trained convolution neural network 
+* video.mp4 showing the testing video on track 1
 
-### `lsq-v1`
+#### More details
+
+#### `lsq-v1`
 Although the docker image `CarND Term1 Starter Kit` provided by Udacity can be used to train model, it is based on CPU. In order to train model on GPU with Tensorflow/Keras, I write this dockerfile. Usage of this docker image contains two steps: build docker image and run docker image, once you built docker image you don't have to do it again.
 ```sh
 Step1: build docker image
@@ -40,7 +46,9 @@ Step2: run docker image
 (bash) nvidia-docker run -it --rm -v `pwd`:/notebooks lsq:v1 bash
 ```
 
-### `drive.py`
+Ps: this docker image can only be used for training until now.
+ 
+#### `drive.py`
 
 Usage of `drive.py` requires you have saved the trained model as an h5 file, i.e. `model.h5`. See the [Keras documentation](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model) for how to create this file using the following command:
 ```sh
@@ -55,23 +63,23 @@ python drive.py model.h5
 
 The above command will load the trained model and use the model to make predictions on individual images in real-time and send the predicted angle back to the server via a websocket connection.
 
-#### Saving a video of the autonomous agent
+When your model can correctly predict the steering angle, you can aving a video of the autonomous agent by:
 
 ```sh
-python drive.py model.h5 run1
+python drive.py model.h5 video1
 ```
 
-The fourth argument, `run1`, is the directory in which to save the images seen by the agent. If the directory already exists, it'll be overwritten.
+The fourth argument, `video1`, is the directory in which to save the images seen by the agent. If the directory already exists, it'll be overwritten.
 
 The image file name is a timestamp of when the image was seen. This information is used by `video.py` to create a chronological video of the agent driving.
 
-### `video.py`
+#### `video.py`
 
 ```sh
-python video.py run1
+python video.py video1
 ```
 
-Creates a video based on images found in the `run1` directory. The name of the video will be the name of the directory followed by `'.mp4'`, so, in this case the video will be `run1.mp4`.
+Creates a video based on images found in the `video1` directory. The name of the video will be the name of the directory followed by `'.mp4'`, so, in this case the video will be `video1.mp4`.
 
 
 [//]: # (Image References)
