@@ -97,6 +97,35 @@ Creates a video based on images found in the `video1` directory. The name of the
 [left_rgb]: ./examples/left_rgb.jpg "left_resize"
 [right_rgb]: ./examples/right_rgb.jpg "right_resize"
 
+Data preprocessing
+---
+I use the sample data provided by Udacity to train my model, the sample data contains imagines capture by three camera(left/center/right) and a .csv file recording the steering angles. All the imagine captured by three camera are used to train my model and steering angles for left and right  are moddified to correct the behavioral of vihicle.
+##### 1. Original data
+The original imagine is in RGB and in (160, 320).  
+![alt text][left] ![alt text][center] ![alt text][right]  
+But cv2.imread() read imagines as BGR and this will have a great impact.  
+![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
+
+##### 2. Genometric transformation
+For training efficiency and accurancy, I change the shape of imagine from (160, 320) to (80, 80)  
+![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
+
+##### 3. Change colorspaces
+Then, I change the colorspace of the resized imagine.  
+![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
+
+##### 4. Angle modification
+The steering angles(labels) for left/right camera are modified by adding +/-0.15 to make the vihicle performs better.
+```sh
+left_angle = float(line[3]) + 0.15
+right_angle = float(line[3]) - 0.15
+```
+
+##### 5. Data shuffling
+Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
+```sh
+X_train, y_train = shuffle(X_train, y_train)
+```
 
 Model
 ---
@@ -147,36 +176,6 @@ The whole model architecture is as following.
 | Fully connected		| connect every neurel with next layer  		    | 50        | 10         |  		      |
 | Fully connected		| output a prediction of steering angle  		    | 10        | 1          |            |
 
-
-Data preprocessing
----
-I use the sample data provided by Udacity to train my model, the sample data contains imagines capture by three camera(left/center/right) and a .csv file recording the steering angles. All the imagine captured by three camera are used to train my model and steering angles for left and right  are moddified to correct the behavioral of vihicle.
-##### 1. Original data
-The original imagine is in RGB and in (160, 320).  
-![alt text][left] ![alt text][center] ![alt text][right]  
-But cv2.imread() read imagines as BGR and this will have a great impact.  
-![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
-
-##### 2. Genometric transformation
-For training efficiency and accurancy, I change the shape of imagine from (160, 320) to (80, 80)  
-![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
-
-##### 3. Change colorspaces
-Then, I change the colorspace of the resized imagine.  
-![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
-
-##### 4. Angle modification
-The steering angles(labels) for left/right camera are modified by adding +/-0.15 to make the vihicle performs better.
-```sh
-left_angle = float(line[3]) + 0.15
-right_angle = float(line[3]) - 0.15
-```
-
-##### 5. Data shuffling
-Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
-```sh
-X_train, y_train = shuffle(X_train, y_train)
-```
 
 Training
 ---
