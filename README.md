@@ -148,21 +148,10 @@ The final model architecture is as following:
 | Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64   | 13x1x64    | Relu       |
 | Dropout				    | Avoiding overfitting      					          | 13x1x64   | 13x1x64    |  		      |
 | Flatten				    | Input 13x1x64 -> Output 832					          | 13x1x64   | 832        |  		      |
-| Fully connected		| connect every neurel with next layer 		      |  832      | 100        |  		      |
+| Fully connected		| connect every neurel with next layer 		      | 832       | 100        |  		      |
 | Fully connected		| connect every neurel with next layer	        | 100       | 50         |  		      |
 | Fully connected		| connect every neurel with next layer  		    | 50        | 10         |  		      |
-| Fully connected		| output a prediction of steering angle  		    |           |            |            |
-| Convolution       | kernel: 5x5; stride:1x1; padding: valid  	    | 32x32x3   | 28x28x9     |
-| Max pooling	     	| kernel: 2x2; stride:2x2; padding: valid 	    | 28x28x9   | 14x14x9     |
-| Convolution      	| kernel: 3x3; stride:1x1; padding: valid 	    | 14x14x9   | 12x12x32    |
-| Max pooling	     	| kernel: 2x2; stride:1x1; padding: valid  		  | 12x12x32  | 10x10x32    |
-| Convolution      	| kernel: 3x3; stride:1x1; padding: valid 	    | 10x10x32  | 8x8x96      |
-| Max pooling	     	| kernel: 2x2; stride:2x2; padding: valid  	    | 8x8x96    | 4x4x96      |
-| Flatten				    | Input 5x5x32 -> Output 800					          | 4x4x96    | 1536        |
-| Fully connected		| connect every neurel with next layer 		      | 1536      | 800         |
-| Fully connected		| connect every neurel with next layer	        | 800       | 400         |
-| Fully connected		| connect every neurel with next layer  		    | 400       | 200         |
-| Fully connected		| output 43 probabilities for each lablel  		  | 200       | 43          |
+| Fully connected		| output a prediction of steering angle  		    | 10        | 1          |            |
 
 
 Data preprocessing
