@@ -120,7 +120,7 @@ nvidia.add(Dense(10))
 nvidia.add(Dense(1))
 ```
   
-The whole model architecture is as following.
+The whole model architecture is as following:  
 | Layer         		|     Description	        					            | Input     | Output     | Activation |
 |:-----------------:|:---------------------------------------------:|:---------:|:----------:|:----------:|
 | Lambda            | Normalize imagine from [0,255] to [-0.5,0.5]  | 80x80x3   | 80x80x3    |  		      |
