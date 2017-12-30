@@ -128,17 +128,24 @@ The final model architecture is as following:
 | Convolution       | kernel: 3x3; stride:2x2; padding: valid  	    | 80x32x3   | 39x15x24   | Relu       |
 | Convolution       | kernel: 3x3; stride:2x2; padding: valid 	    | 39x15x24  | 19x7x36    | Rule       |
 | Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 19x7x36   | 17x5x48    | Relu       |
-| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48   | 15x3x64    | Relu       |  
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48   | 15x3x64    | Relu       |
 | Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64   | 13x1x64    | Relu       |
 | Dropout				    | Avoiding overfitting      					          | 13x1x64   | 13x1x64    |  		      |
 | Flatten				    | Input 13x1x64 -> Output 832					          | 13x1x64   | 832        |  		      |
 | Fully connected		| connect every neurel with next layer 		      |  832      | 100        |  		      |
 | Fully connected		| connect every neurel with next layer	        | 100       | 50         |  		      |
 | Fully connected		| connect every neurel with next layer  		    | 50        | 10         |  		      |
-| Fully connected		| output a prediction of steering angle  		    |           |            |            | 
+| Fully connected		| output a prediction of steering angle  		    |           |            |            |
 
-| Layer         		|     Description	        					            | Input     | Output      |
-|:-----------------:|:---------------------------------------------:|:---------:|:-----------:| 
+| Layer         		|     Description	        					            | Input     | Output     | Activation |
+|:-----------------:|:---------------------------------------------:|:---------:|:----------:|:----------:|
+| Lambda            | Normalize imagine from [0,255] to [-0.5,0.5]  | 80x80x3   | 80x80x3    |  		      |
+| Cropping          | Crop imagine from (80, 80) to (80, 32)        | 80x80x3   | 80x32x3    |  		      |
+| Convolution       | kernel: 3x3; stride:2x2; padding: valid  	    | 80x32x3   | 39x15x24   | Relu       |
+| Convolution       | kernel: 3x3; stride:2x2; padding: valid 	    | 39x15x24  | 19x7x36    | Rule       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 19x7x36   | 17x5x48    | Relu       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48   | 15x3x64    | Relu       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64   | 13x1x64    | Relu       |
 | Convolution       | kernel: 5x5; stride:1x1; padding: valid  	    | 32x32x3   | 28x28x9     |
 | Max pooling	     	| kernel: 2x2; stride:2x2; padding: valid 	    | 28x28x9   | 14x14x9     |
 | Convolution      	| kernel: 3x3; stride:1x1; padding: valid 	    | 14x14x9   | 12x12x32    |
