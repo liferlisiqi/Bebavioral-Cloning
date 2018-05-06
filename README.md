@@ -1,4 +1,5 @@
 # Behaviorial Cloning
+
 Overview
 ---
 This repository contains all the files for the Behavioral Cloning Project.
@@ -7,15 +8,14 @@ In this project, I will use  deep neural networks and convolutional neural netwo
 
 I'll use image data and steering angles to train a neural network and then use this model to drive the car autonomously around the track in the simulator provided by Udacity.
 
-The Project
+The Project goals/steps
 ---
-The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior. 
 * Design, train and validate a model that predicts a steering angle from image data.
 * Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
 * Summarize the results.
 
-Environment and files
+Dependences
 ---
 This lab requires:
 
@@ -204,5 +204,12 @@ Testing result
 ---
 The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.  
 Moreover, I've tried to use generator to read data, but the vehicle performs much worse, thus, I give up using generator.
+
+Summary
+---
+
+
+References
+---
 
 
