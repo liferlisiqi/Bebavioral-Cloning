@@ -76,9 +76,9 @@ Creates a video based on images found in the `video1` directory. The name of the
 
 
 [//]: # (Image References)
-[bgr]: ./result images/bgr.jpg
-[rgb]: ./result images/rgb.jpg
-[rgb_resize]: ./result images/rgb_resize.jpg
+[bgr]: ./result_images/bgr.jpg
+[rgb]: ./result_images/rgb.jpg
+[rgb_resize]: ./result_images/rgb_resize.jpg
 
 Data preprocessing
 ---
