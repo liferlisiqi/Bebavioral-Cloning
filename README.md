@@ -22,7 +22,7 @@ This lab requires:
 * Docker image [lsq-v1](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
 * Docker image [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit) for testing. 
 * [Simulator](https://github.com/udacity/self-driving-car-sim) for testing and collecting data.
-* [Sample data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided by Udacity on track 1.
+* [Sample data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) on track 1.
 
 The project includes the following files:
 * model.py containing the script to create and train the model
