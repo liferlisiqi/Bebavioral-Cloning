@@ -76,38 +76,25 @@ Creates a video based on images found in the `video1` directory. The name of the
 
 
 [//]: # (Image References)
-
-[center]: ./examples/center.jpg "center"
-[left]: ./examples/left.jpg "left"
-[right]: ./examples/right.jpg "right"
-[center_bgr]: ./examples/center_bgr.jpg "center"
-[left_bgr]: ./examples/left_bgr.jpg "left"
-[right_bgr]: ./examples/right_bgr.jpg "right"
-[center_resize]: ./examples/center_resize.jpg "center_resize"
-[left_resize]: ./examples/left_resize.jpg "left_resize"
-[right_resize]: ./examples/right_resize.jpg "right_resize"
-[center_rgb]: ./examples/center_rgb.jpg "center_resize"
-[left_rgb]: ./examples/left_rgb.jpg "left_resize"
-[right_rgb]: ./examples/right_rgb.jpg "right_resize"
+[bgr]: ./result images/bgr.jpg
+[rgb]: ./result images/rgb.jpg
+[rgb_resize]: ./result images/rgb_resize.jpg
 
 Data preprocessing
 ---
-I use the sample data provided by Udacity to train my model, the sample data contains imagines capture by three camera(left/center/right) and a .csv file recording the steering angles. All the imagine captured by three camera are used to train my model and steering angles for left and right  are moddified to correct the behavioral of vihicle.
+I use the sample data provided by Udacity to train my model, the sample data contains imagines capture by three camera(left/center/right) and a .csv file recording the steering angles. All the imagines captured by three cameras are used to train my model, which will predict steering angles for left\right to correct the behavioral of vihicle.
 ##### 1. Original data
-The original imagine is in RGB and in (160, 320).  
-![alt text][left] ![alt text][center] ![alt text][right]  
-But cv2.imread() read imagines as BGR and this will have a great impact.  
-![alt text][left_bgr] ![alt text][center_bgr] ![alt text][right_bgr]
+The images read through cv2.imread() are in BGR color space as following:  
+![alt text][bgr]   
+And plt.imread() read imagines in RGB color space:    
+![alt text][rgb]  
+Since the testing images are in RGB color space, so it it important that we should use plt.imread() to read training data.  
 
 ##### 2. Genometric transformation
-For training efficiency and accurancy, I change the shape of imagine from (160, 320) to (80, 80)  
-![alt text][left_resize] ![alt text][center_resize] ![alt text][right_resize]
+For training efficiency, I change the shape of imagine from (160, 320) to (80, 80), meanwhile we should also resize image when testing by modifing the `drive.py` at line 64. 
+![alt text][rgb_resize]
 
-##### 3. Change colorspaces
-Then, I change the colorspace of the resized imagine.  
-![alt text][left_rgb] ![alt text][center_rgb] ![alt text][right_rgb]
-
-##### 4. Angle modification
+##### 3. Angle modification
 The steering angles(labels) for left/right camera are modified by adding +/-0.15 to make the vihicle performs better.
 ```sh
 left_angle = float(line[3]) + 0.15
