@@ -17,18 +17,27 @@ The Project goals/steps
 
 Dependences
 ---
-This lab requires:
+This project requires three environments, the first for training, the second for testing and the last for simulation:
 
-* Docker image [lsq-v1](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training. 
-* Docker image [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit) for testing. 
-* [Simulator](https://github.com/udacity/self-driving-car-sim) for testing and collecting data.
-* [Sample data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) on track 1.
+* The training environment requires:
 
-The project includes the following files:
-* model.py containing the script to create and train the model
-* drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
-* video.mp4 showing the testing video on track 1
+The already obtained training data captured from the simulator can be download [here](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip). After your model is trained, `model.h5` will be saved for testing.
+
+* The testing environment requires:
+
+The following command is used for connecting to simulator to testing your model.
+```sh
+python drive.py model.h5
+(if you're using Docker)docker run -it --rm -p 4567:4567 -v `pwd`:/src udacity/carnd-term1-starter-kit python drive.py model.h5
+```
+
+* The simulation environment
+The simulator is provided by Udacity, more information can be found in this [repository](https://github.com/udacity/self-driving-car-sim). 
+
+
+Ps: There are two docker images may help you.
+* Docker image [lsq-v1](https://github.com/liferlisiqi/Udacity-CarND-term1/blob/master/P3-behavioral-cloneing/lsq-v1) for training on GPU. 
+* Docker image [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit) for training on CPU and testing. 
 
 #### More details
 
@@ -47,10 +56,7 @@ Ps: this docker image can only be used for training until now.
  
 #### `drive.py`
 
-Usage of `drive.py` requires you have saved the trained model as an h5 file, i.e. `model.h5`. See the [Keras documentation](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model) for how to create this file using the following command:
-```sh
-model.save(filepath)
-```
+Usage of `drive.py` requires you have saved the trained model as an h5 file, i.e. `model.h5`.
 
 Once the model has been saved, it can be used with drive.py using this command:
 
