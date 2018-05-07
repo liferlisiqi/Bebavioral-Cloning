@@ -42,7 +42,7 @@ Ps: There are two docker images may help you.
 #### More details
 
 #### `lsq-v1`
-Although the docker image `CarND Term1 Starter Kit` provided by Udacity can be used to train model, it is based on CPU. In order to train model on GPU with Tensorflow/Keras, I write this dockerfile. Usage of this docker image contains two steps: build docker image and run docker image, once you built docker image you don't have to do it again.
+In order to train model on GPU with Tensorflow/Keras, I write this dockerfile. Usage of this docker image contains two steps: build docker image and run docker image, once you built docker image you don't have to do it again.
 ```sh
 Step1: build docker image
 docker build -t=lsq:v1 -f=lsq-v1 .
@@ -51,15 +51,10 @@ Step2: run docker image
 (jupyter) nvidia-docker run -it --rm -p 8888:8888 -v `pwd`:/notebooks lsq:v1
 (bash) nvidia-docker run -it --rm -v `pwd`:/notebooks lsq:v1 bash
 ```
-
 Ps: this docker image can only be used for training until now.
  
 #### `drive.py`
-
-Usage of `drive.py` requires you have saved the trained model as an h5 file, i.e. `model.h5`.
-
 Once the model has been saved, it can be used with drive.py using this command:
-
 ```sh
 python drive.py model.h5
 ```
@@ -71,17 +66,12 @@ When your model can correctly predict the steering angle, you can aving a video 
 ```sh
 python drive.py model.h5 video1
 ```
-
-The fourth argument, `video1`, is the directory in which to save the images seen by the agent. If the directory already exists, it'll be overwritten.
-
-The image file name is a timestamp of when the image was seen. This information is used by `video.py` to create a chronological video of the agent driving.
+The fourth argument, `video1`, is the directory in which to save the images seen by the agent. If the directory already exists, it'll be overwritten. The image file name is a timestamp of when the image was seen. This information is used by `video.py` to create a chronological video of the agent driving.
 
 #### `video.py`
-
 ```sh
 python video.py video1
 ```
-
 Creates a video based on images found in the `video1` directory. The name of the video will be the name of the directory followed by `'.mp4'`, so, in this case the video will be `video1.mp4`.
 
 
