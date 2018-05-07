@@ -114,12 +114,6 @@ left_angle = float(line[3]) + 0.15
 right_angle = float(line[3]) - 0.15
 ```
 
-##### 5. Data shuffling
-Finally, I randomly shuffled the data set and put Y% of the data into a validation set.
-```sh
-X_train, y_train = shuffle(X_train, y_train)
-```
-
 Model
 ---
 The data is normalized in the model using a Keras lambda layer and croped from (80, 80) to (80, 32).
