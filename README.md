@@ -2,11 +2,7 @@
 
 Overview
 ---
-This repository contains all the files for the Behavioral Cloning Project.
-
-In this project, I will use  deep neural networks and convolutional neural networks to clone driving behavior. I will train, validate and test a model using Keras. The model will output a steering angle to an autonomous vehicle. 
-
-I'll use image data and steering angles to train a neural network and then use this model to drive the car autonomously around the track in the simulator provided by Udacity.
+In this project, I will use deep neural networks and convolutional neural networks to clone driving behavior by End-to-End learning. I will train, validate and test a model using Keras. The model will output a steering angle to guide an autonomous vehicle. The data I use it captured by three cameras, so there will be a step to combine three images to train the model.
 
 The Project goals/steps
 ---
@@ -31,7 +27,7 @@ python drive.py model.h5
 (if you're using Docker)docker run -it --rm -p 4567:4567 -v `pwd`:/src udacity/carnd-term1-starter-kit python drive.py model.h5
 ```
 
-* The simulation environment
+* The simulation environment  
 The simulator is provided by Udacity, more information can be found in this [repository](https://github.com/udacity/self-driving-car-sim). 
 
 
@@ -88,17 +84,18 @@ The images read through cv2.imread() are in BGR color space as following:
 ![alt text][bgr]   
 And plt.imread() read imagines in RGB color space:    
 ![alt text][rgb]  
-Since the testing images are in RGB color space, so it it important that we should use plt.imread() to read training data.  
+Since the testing images are in RGB color space, so it it important that we should use *plt.imread()* to read training data.  
 
 ##### 2. Genometric transformation
 For training efficiency, I change the shape of imagine from (160, 320) to (80, 80), meanwhile we should also resize image when testing by modifing the `drive.py` at line 64. 
 ![alt text][rgb_resize]
 
 ##### 3. Angle modification
-The steering angles(labels) for left/right camera are modified by adding +/-0.15 to make the vihicle performs better.
+This is the core operation of using images captured by three cameras to train and test the model. There is another operation to process the image, which is to crop the image from (80,80) to (80,32) with keras. And this is some kinds of data augmentation, through adding the images captured by left and right camera, we have three times of training data. More important, the labels for left and right images are modified to be used as tuning situation.
+The steering angles(labels) for left/right camera are modified by adding +/-0.10 to make the vihicle performs better.
 ```sh
-left_angle = float(line[3]) + 0.15
-right_angle = float(line[3]) - 0.15
+left_angle = float(line[3]) + 0.10
+right_angle = float(line[3]) - 0.10
 ```
 
 Model
@@ -134,27 +131,21 @@ nvidia.add(Dense(1))
   
 The whole model architecture is as following.  
 
-| Layer         	|     Description	        					| Input     | Output     | Activation |
-|:-----------------:|:---------------------------------------------:|:---------:|:----------:|:----------:|
-| Lambda            | Normalize imagine from [0,255] to [-0.5,0.5]  | 80x80x3   | 80x80x3    |  		  |
-| Cropping          | Crop imagine from (80, 80) to (80, 32)        | 80x80x3   | 80x32x3    |  	      |
-| Convolution       | kernel: 3x3; stride:2x2; padding: valid  	    | 80x32x3   | 39x15x24   | Relu       |
-| Convolution       | kernel: 3x3; stride:2x2; padding: valid 	    | 39x15x24  | 19x7x36    | Rule       |
-| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 19x7x36   | 17x5x48    | Relu       |
-| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48   | 15x3x64    | Relu       |
-| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64   | 13x1x64    | Relu       |
-| Dropout		    | Avoiding overfitting      					| 13x1x64   | 13x1x64    |  		  |
-| Flatten		    | Input 13x1x64 -> Output 832				    | 13x1x64   | 832        |  	      |
-| Fully connected	| connect every neurel with next layer 		    | 832       | 100        |  	      |
-| Fully connected	| connect every neurel with next layer	        | 100       | 50         |  	      |
-| Fully connected	| connect every neurel with next layer  		| 50        | 10         | 		      |
-| Fully connected	| output a prediction of steering angle  		| 10        | 1          |            |
-| Dropout		    | Avoiding overfitting      			        | 13x1x64   | 13x1x64    |  	      |
-| Flatten			| Input 13x1x64 -> Output 832		            | 13x1x64   | 832        |  	      |
-| Fully connected	| connect every neurel with next layer 		    | 832       | 100        | 		      |
-| Fully connected	| connect every neurel with next layer	        | 100       | 50         | 		      |
-| Fully connected	| connect every neurel with next layer  	    | 50        | 10         | 		      |
-| Fully connected	| output a prediction of steering angle  		| 10        | 1          |            |
+| Layer         	|     Description	        					| Output     | Activation |
+|:-----------------:|:---------------------------------------------:|:----------:|:----------:|
+| Lambda            | Normalize imagine from [0,255] to [-0.5,0.5]  | 80x80x3    |  		  |
+| Cropping          | Crop imagine from (80, 80) to (80, 32)        | 80x32x3    |  	      |
+| Convolution       | kernel: 3x3; stride:2x2; padding: valid  	    | 39x15x24   | Relu       |
+| Convolution       | kernel: 3x3; stride:2x2; padding: valid 	    | 19x7x36    | Rule       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 17x5x48    | Relu       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 15x3x64    | Relu       |
+| Convolution       | kernel: 3x3; stride:1x1; padding: valid 	    | 13x1x64    | Relu       |
+| Dropout		    | Avoiding overfitting      					| 13x1x64    |  		  |
+| Flatten		    | Input 13x1x64 -> Output 832				    | 832        |  	      |
+| Fully connected	| connect every neurel with next layer 		    | 100        |  	      |
+| Fully connected	| connect every neurel with next layer	        | 50         |  	      |
+| Fully connected	| connect every neurel with next layer  		| 10         | 		      |
+| Fully connected	| connect every neurel with next layer  		| 1          | 		      |
 
 
 Training
@@ -170,23 +161,19 @@ The model was trained and validated on different data sets(8:2) to ensure that t
 EPOCHS = 5
 nvidia.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=EPOCHS)
 ```
-
-Finally, the model was save as model.h5 for testing.
-```sh
-nvidia.save('model.h5')
-```
-
+### train with generator
+Another efficient way to train the model is using generator provided by Keras, it allows you to do real-time data augmentation on images on CPU in parallel to training your model on GPU.([More details](https://faroit.github.io/keras-docs/1.2.2/models/sequential/))
 
 Testing result
 ---
-The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [video](https://youtu.be/bXbnlHCgiVU) can be watched on Youtube too.  
-Moreover, I've tried to use generator to read data, but the vehicle performs much worse, thus, I give up using generator.
+The model was tested by running it through the simulator and the vehicle is able to drive autonomously around the track 1 without leaving the road. The [result video](https://youtu.be/gs2o7dtvt-E) can be watched on Youtube too.  
 
 Summary
 ---
-
+In this project, I've trained a model to guide an autonomous car running in a simulator by End-to-End learning. The autonomous car owns three cameras: left, center and right, thus, all the images captured by these camera are used to train the model after some preprocess. The result show that it can perfected running in the simulator by itself.
 
 References
 ---
-
+[End-to-End Deep Learning for Self-Driving Cars](https://devblogs.nvidia.com/deep-learning-self-driving-cars/)
+[Udacity Self-Driving Car Simulator](https://github.com/udacity/self-driving-car-sim)
 
