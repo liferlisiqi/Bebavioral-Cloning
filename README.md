@@ -174,6 +174,6 @@ In this project, I've trained a model to guide an autonomous car running in a si
 
 References
 ---
-[End-to-End Deep Learning for Self-Driving Cars](https://devblogs.nvidia.com/deep-learning-self-driving-cars/)
+[End-to-End Deep Learning for Self-Driving Cars](https://devblogs.nvidia.com/deep-learning-self-driving-cars/)  
 [Udacity Self-Driving Car Simulator](https://github.com/udacity/self-driving-car-sim)
 
